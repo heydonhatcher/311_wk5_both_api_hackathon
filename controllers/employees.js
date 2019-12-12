@@ -1,15 +1,40 @@
+const mysql = require("mysql");
+const pool = require("../sql/connection");
+const { handleSQLError } = require("../sql/error");
 //creating "controller/FUNCTION"
 //'exports' goes at beginning to export that
 //function so it can be called in routes.
 
-exports.getEmployees = (req, res) => {
-  res.send("getting employees...");
+const getEmployees = (req, res) => {
+  pool.query("SELECT * FROM employees LIMIT 50", (err, rows) => {
+    if (err) return handleSQLError(res, err);
+    return res.json(rows);
+  });
+  //res.send("getting employees...");
 };
 
-exports.getEmployeesById = (req, res) => {
-  res.send("getting employees...");
+const getEmployeesById = (req, res) => {
+  let sql = "SELECT * FROM ?? WHERE ?? = ?";
+  sql = mysql.format(sql, ["users", "emp_no", req.params.id]);
+  pool.query(sql, (err, rows) => {
+    if (err) return handleSQLError(res, err);
+    return res.json(rows);
+  });
+  //res.send("getting employees...");
 };
 
-exports.getEmployeesByFirstName = (req, res) => {
-  res.send("getting employees...");
+const getEmployeesByFirstName = (req, res) => {
+  let sql = "SELECT from ?? WHERE ?? = ?";
+  sql = mysql.format(sql, ["employees", "first_name", req.params.first_name]);
+  pool.query(sql, (err, results) => {
+    if (err) return handleSQLError(res, err);
+    return res.json(rows);
+  });
+  //res.send("getting employees...");
+};
+
+module.exports = {
+  getEmployees,
+  getEmployeesById,
+  getEmployeesByFirstName
 };
