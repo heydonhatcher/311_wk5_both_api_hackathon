@@ -1,6 +1,6 @@
 const mysql = require("mysql");
-const pool = require("../sql/connection");
-const { handleSQLError } = require("../sql/error");
+const pool = require("../mySQL/connection");
+const { handleSQLError } = require("../mySQL/error");
 //creating "controller/FUNCTION"
 //'exports' goes at beginning to export that
 //function so it can be called in routes.
