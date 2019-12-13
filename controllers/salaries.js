@@ -5,37 +5,36 @@ const { handleSQLError } = require("../mySQL/error");
 //'exports' goes at beginning to export that
 //function so it can be called in routes.
 
-const getEmployees = (req, res) => {
-  pool.query("SELECT * FROM employees LIMIT 50", (err, rows) => {
+const getSalaries = (req, res) => {
+  pool.query("SELECT * FROM salaries LIMIT 50", (err, rows) => {
     if (err) return handleSQLError(res, err);
     return res.json(rows);
   });
-  //res.send("getting employees...");
+  //res.send("getting Salaries...");
 };
 
-const getEmployeesById = (req, res) => {
+const getSalariesById = (req, res) => {
   let sql = "SELECT * FROM ?? WHERE ?? = ?";
-  sql = mysql.format(sql, ["employees", "emp_no", req.params.id]);
+  sql = mysql.format(sql, ["salaries", "emp_no", req.params.id]);
   pool.query(sql, (err, rows) => {
     if (err) return handleSQLError(res, err);
     return res.json(rows);
   });
-  //res.send("getting employees...");
+  //res.send("getting Salaries...");
 };
 
-const getEmployeesByFirstName = (req, res) => {
-
+const getSalariesBySalary = (req, res) => {
   let sql = "SELECT * FROM ?? WHERE ?? = ?";
-  sql = mysql.format(sql, ["employees", "first_name", req.params.first_name]);
+  sql = mysql.format(sql, ["salaries", "salary", req.params.salary]);
   pool.query(sql, (err, rows) => {
     if (err) return handleSQLError(res, err);
     return res.json(rows);
   });
-  
+  //res.send("getting Salaries...");
 };
 
 module.exports = {
-  getEmployees,
-  getEmployeesById,
-  getEmployeesByFirstName
+  getSalaries,
+  getSalariesById,
+  getSalariesBySalary
 };
