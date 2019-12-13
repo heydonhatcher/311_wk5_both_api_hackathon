@@ -3,7 +3,7 @@ const express = require("express");
 //making express easier to call through app
 const app = express();
 //calling employee routes
-const employeeRoutes = require("./routes/employees");
+const employeeRoutes = require("../routes/employees");
 
 var bodyParser = require("body-parser");
 app.use(bodyParser.json());
