@@ -7,7 +7,7 @@ const { handleSQLError } = require("../mySQL/error");
 
 const getDepartmentByDeptNo = (req, res) => {
   let sql = "SELECT * FROM ?? WHERE ?? = ?";
-  sql = mysql.format(sql, ["employees", "dept_no", req.params.dept_no]);
+  sql = mysql.format(sql, ["departments", "dept_no", req.params.dept_no]);
   pool.query(sql, (err, rows) => {
     if (err) return handleSQLError(res, err);
     return res.json(rows);

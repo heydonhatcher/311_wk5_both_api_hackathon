@@ -6,7 +6,7 @@ const { handleSQLError } = require("../mySQL/error");
 //function so it can be called in routes.
 
 const getTitles = (req, res) => {
-  pool.query("SELECT * FROM employees LIMIT 50", (err, rows) => {
+  pool.query("SELECT * FROM titles LIMIT 50", (err, rows) => {
     if (err) return handleSQLError(res, err);
     return res.json(rows);
   });
